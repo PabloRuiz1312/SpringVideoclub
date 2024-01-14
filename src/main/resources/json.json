@@ -1,0 +1,6 @@
+[ 
+    { "movieId": 1, "title": "Encanto", "duration" : "01:42" },
+    { "movieId": 2, "title": "Frozen: El reino del hielo", "duration" : "01:41" },
+    { "movieId": 3, "title": "Hércules", "duration" : "01:33" },
+    { "movieId": 4, "title": "Vaiana", "duration" : "01:47" }
+]
