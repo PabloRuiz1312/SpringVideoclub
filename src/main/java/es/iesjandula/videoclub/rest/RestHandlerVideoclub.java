@@ -5,6 +5,11 @@ import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpHeaders;
@@ -91,6 +96,60 @@ public class RestHandlerVideoclub implements IChecker,IUtils
 		}
 	}
 	
+	@RequestMapping ( method = RequestMethod.GET,value = "/movies")
+	public ResponseEntity <?> getMovies()
+	{
+		try
+		{
+			return ResponseEntity.ok().body(this.movies);
+		}
+		catch(Exception ex)
+		{
+			log.error("Error de servidor",ex);
+			return ResponseEntity.status(500).body("Error de servidor"+ex);
+		}
+	}
+	
+	@RequestMapping ( method = RequestMethod.GET,value = "/movies-http")
+	public ResponseEntity <?> getMoviesHttp()
+	{
+		try
+		{
+			CloseableHttpClient httpClient = HttpClients.createDefault();
+			String url = "http://localhost:8080/videoclub/movies";
+			//PARAMETROS PATH
+			//url.replace("{param}","paramReplaced");
+			
+			//PARAMETROS QUERY
+			//URIBuilder uri = new URIBuilder("url");
+			//uri.setParameter("nombre","valor");
+			//String urlQuery = uri.build().toString();
+			
+			//PARAMETROS HEADER
+			//HttpGEt request = new HttpGet("url);
+			//request.addHeader("clave","valor");
+			
+			//PARAMETROS BODY
+			//ObjectMapper objectMapper = new ObjectMapper();
+			//String jsonBody = objectMapper.writeValueAsString(new Objeto(atts));
+			//StringEntity requestBody = new StringEntity(jsonBody);
+			//HttpGet request = new HttpGet("url");
+			//request.setEntity(requestBody);
+			
+			//PARAMETROS BODY CON ARRAY
+			//List<Objeto> objetos = Arrays.asList(objetos);
+			//Mismos pasos de antes
+			HttpGet request = new HttpGet(url);
+			CloseableHttpResponse response = httpClient.execute(request);
+			String responseBody = EntityUtils.toString(response.getEntity());
+			return ResponseEntity.ok().body(responseBody);
+		}
+		catch(Exception ex)
+		{
+			log.error("Error de servidor",ex);
+			return ResponseEntity.status(500).body("Error de servidor"+ex);
+		}
+	}
 	@RequestMapping( method = RequestMethod.POST, value = "/users",consumes = "multipart/form-data")
 	public ResponseEntity <?> uploadUser(
 			@RequestPart( value = "jsonFile") MultipartFile jsonFile, 
