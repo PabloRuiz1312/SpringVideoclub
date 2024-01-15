@@ -139,6 +139,12 @@ public class RestHandlerVideoclub implements IChecker,IUtils
 			//PARAMETROS BODY CON ARRAY
 			//List<Objeto> objetos = Arrays.asList(objetos);
 			//Mismos pasos de antes
+			
+			//SUBIR FICHERO
+			//HttpPost request = new HttpPost(url);
+			//HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody("fichero",file,
+			//ContentType.MULTIPART_FORM_DATA,"movies.json").build()
+			//request.setEntity(entity);
 			HttpGet request = new HttpGet(url);
 			CloseableHttpResponse response = httpClient.execute(request);
 			String responseBody = EntityUtils.toString(response.getEntity());

@@ -1,0 +1,9 @@
+es\iesjandula\videoclub\utils\IChecker.class
+es\iesjandula\videoclub\VideoclubApplication.class
+es\iesjandula\videoclub\models\InfoReview.class
+es\iesjandula\videoclub\models\Movie.class
+es\iesjandula\videoclub\rest\RestHandlerVideoclub.class
+es\iesjandula\videoclub\models\User.class
+es\iesjandula\videoclub\utils\Json.class
+es\iesjandula\videoclub\exception\MovieError.class
+es\iesjandula\videoclub\utils\IUtils.class
